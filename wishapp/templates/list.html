@@ -1,0 +1,38 @@
+{% extends "base.html" %}
+
+{% block title %}List{% endblock title %}
+
+{% block content %}
+
+{% if request.user.id == userid %}
+    <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+      <span class="navbar-toggler-icon"><a class="navbar-brand" href="{% url 'addwish' user.id %}">Add a new item to your wishlist</a></span>
+    </button>
+{% endif %}
+<div class="row">
+    {% for wish in wishes %}
+    <div class="col-md-4">
+        <div class="card my-card">
+
+          <div class="card-body">
+            <a href="{{wish.url}}" target="_blank"><h5 class="card-title">{{wish.name}}</h5></a>
+            {% if wish.image %}
+              <img class="card-img-top" src="{{wish.image.url}}" alt="wish pic">
+            {% endif %}
+          </div>
+          <ul class="list-group list-group-flush">
+            <li class="list-group-item text-center">
+              <div class="col-md-4">
+                {% if request.user.id == userid %}
+                <div class="col-md-4">
+                      <a href="{% url  'delwish' user.id wish.id %}" class="btn btn-outline-danger btn-block">Delete</a>
+                  </div>
+                {% endif %}  
+              </div>
+            </li>
+          </ul>
+        </div>
+    </div>
+    {% endfor %}
+</div>
+{% endblock content %}

@@ -1,0 +1,12 @@
+{% extends "base.html" %}
+
+{% block title %}Request Denied{% endblock title %}
+
+{% block content %}
+<br>
+<div class="jumbotron">
+  <h1 class="display-4">You can't add items to another user's wishlist</h1>
+  <hr class="my-4">
+  <a href="{% url 'wishlist' user.id %}"><p>click here to go to your list.</p></a>
+</div>
+{% endblock content %}
